@@ -550,3 +550,59 @@ button { font: inherit; }
   background: var(--ink); margin-left: 14px;
   animation: ks-pulse 1s steps(2) infinite;
 }
+
+/* ------------------------------------------------------------
+   Mobile — collapse the 12-col grid, stack nav + hero
+------------------------------------------------------------ */
+html, body { overflow-x: clip; }
+.ks-grid { grid-template-columns: repeat(var(--grid), minmax(0, 1fr)); }
+
+@media (max-width: 760px) {
+  :root { --pad: 18px; --gap: 12px; }
+  .ks-grid { grid-template-columns: minmax(0, 1fr); }
+  .ks-meta-row, .h-classic-headline, .h-classic-side, .h-classic-deck, .h-classic-stats,
+  .h-fill-frame, .h-runner-left, .h-runner-right,
+  .kab-bio, .kab-aside, .ks-foot-l, .ks-foot-r { grid-column: 1 / -1; }
+
+  /* Nav: brand + clock on one row, sections as a horizontal scroll strip */
+  .ks-nav-inner { grid-template-columns: 1fr auto; gap: 8px 12px; padding: 10px var(--pad); }
+  .ks-nav-list {
+    grid-column: 1 / -1; grid-row: 2;
+    flex-wrap: nowrap; justify-content: flex-start; gap: 14px;
+    overflow-x: auto; white-space: nowrap; scrollbar-width: none;
+    margin: 0 calc(-1 * var(--pad)); padding: 2px var(--pad) 4px;
+  }
+  .ks-nav-list::-webkit-scrollbar { display: none; }
+  .ks-mark { white-space: nowrap; }
+  .ks-mark span { display: none; }
+
+  /* Hero */
+  .ks-hero { padding: 120px 0 56px; }
+  .ks-meta-row { gap: 10px 20px; margin-bottom: 32px; }
+  .h-classic-headline h1 { font-size: clamp(40px, 12vw, 64px); }
+  .h-classic-side { padding-top: 32px; align-self: start; }
+  .h-classic-deck { padding-top: 32px; }
+  .h-classic-deck p { font-size: 17px; }
+  .h-classic-stats { margin-top: 24px; }
+  .ks-stat { padding: 14px; }
+  .ks-stat-v { font-size: 28px; }
+  .h-fill-frame { min-height: 0; }
+  .h-fill-name { font-size: clamp(56px, 18vw, 120px); }
+  .h-fill-meta { position: static; width: auto; margin: 24px 0; }
+  .h-fill-foot { position: static; }
+  .h-runner-term { padding: 18px; font-size: 13px; overflow-x: auto; }
+
+  /* Sections */
+  .ks-section { padding: 64px 0; }
+  .ks-sec-h { flex-wrap: wrap; margin-bottom: 28px; }
+  .ks-sec-meta { margin-left: 0; text-align: left; width: 100%; }
+  .kx-grid a { border-right: 0; border-bottom: 1px solid var(--ink); }
+  .kx-grid a:last-child { border-bottom: 0; }
+  .ks-foot-r { text-align: left; }
+
+  /* Writing rows: title + arrow, excerpt underneath */
+  .kr-row { row-gap: 8px; }
+  .kr-row .kr-title { grid-column: 1; grid-row: 1; }
+  .kr-row .kr-arrow { grid-column: 2; grid-row: 1; }
+  .kr-row .kr-ex { grid-column: 1 / -1; grid-row: 2; }
+}
